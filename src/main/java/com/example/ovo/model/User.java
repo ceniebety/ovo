@@ -13,6 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.beans.factory.annotation.Required;
 
 @Entity
 @Table(name = "User")
@@ -29,12 +34,18 @@ public class User implements Serializable{
 	private long id;
 
 	@Column(name = "fullname", nullable = false, length = 200 )
+	@NotNull
 	private String fullname;
 	
 	@Column(name = "username", nullable = false, length = 80)
+	@Size(min=5, message="Username should have atleast 5 characters")
+	@NotNull
+	@UniqueElements
 	private String username;
 	
 	@Column(name = "password", nullable = false, length = 50)
+	@Size(min=8, message="Password should have atleast 5 characters")
+	@NotNull
 	private String password;
 	
 	@ManyToMany

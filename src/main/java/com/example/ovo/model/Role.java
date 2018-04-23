@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
 @Table(name = "Role")
@@ -24,6 +27,8 @@ public class Role implements Serializable{
 	private long id;
 	
 	@Column(name = "role", nullable = false, length = 50)
+	@NotNull
+	@UniqueElements
 	private String role;
 
 	public long getId() {
